@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const LUMA_URL = "https://luma.com/vgw9t3kt";
 
@@ -179,27 +180,21 @@ export default function HomePage() {
 
         {/* Right: venue photo */}
         <div className="hidden md:block md:w-1/2 relative">
-          {/*
-            === REPLACE THIS ENTIRE DIV with a next/image ===
-            <Image src="/hero-legacy-club.jpg" alt="Legacy Club Las Vegas" fill className="object-cover object-center" priority />
-            Add a dark overlay div on top: className="absolute inset-0 bg-gradient-to-r from-[#060c1a] to-transparent z-10"
-          */}
-          <div className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #0a1428 0%, #0f1e45 35%, #142050 60%, #0a1428 100%)" }}>
-            {/* Ambient glow */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-40"
-              style={{ background: "radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.15) 0%, transparent 65%)" }} />
-            {/* Placeholder label */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center px-8">
-                <div className="text-[9px] uppercase tracking-[0.4em] text-white/15 mb-2">Replace with</div>
-                <div className="text-[9px] uppercase tracking-[0.4em] text-white/15">Legacy Club rooftop photo</div>
-              </div>
-            </div>
-          </div>
-          {/* Left fade */}
-          <div className="absolute inset-y-0 left-0 w-24 z-10"
+          <Image
+            src="/hero-legacy-club.webp"
+            alt="Legacy Club Rooftop at Circa Resort, Las Vegas"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Left fade into navy */}
+          <div className="absolute inset-y-0 left-0 w-40 z-10"
             style={{ background: "linear-gradient(to right, #060c1a, transparent)" }} />
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 z-10"
+            style={{ background: "linear-gradient(to top, #060c1a, transparent)" }} />
+          {/* Subtle dark overlay for contrast */}
+          <div className="absolute inset-0 z-10" style={{ background: "rgba(4,8,15,0.25)" }} />
         </div>
       </section>
 
