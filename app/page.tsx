@@ -1,6 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
+function CryptoMondaysLogo({ size = 48 }: { size?: number }) {
+  return (
+    <Image
+      src="/crypto-mondays-logo.png"
+      alt="Crypto Mondays Las Vegas"
+      width={size}
+      height={size}
+      className="object-contain"
+    />
+  );
+}
+
 const LUMA_URL = "https://luma.com/CryptoMondaysVegas";
 
 const features = [
@@ -72,16 +84,6 @@ const speakers = [
   },
 ];
 
-// Pyramid logo SVG
-function PyramidLogo() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <polygon points="16,2 30,28 2,28" stroke="#c9a84c" strokeWidth="1.5" fill="none"/>
-      <polygon points="16,10 24,28 8,28" stroke="#c9a84c" strokeWidth="1" fill="rgba(201,168,76,0.08)"/>
-      <line x1="16" y1="2" x2="16" y2="28" stroke="#c9a84c" strokeWidth="0.75" strokeOpacity="0.5"/>
-    </svg>
-  );
-}
 
 export default function HomePage() {
   return (
@@ -91,13 +93,9 @@ export default function HomePage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#060c1a]/90 backdrop-blur-xl border-b border-[#c9a84c]/10">
         <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <PyramidLogo />
-            <div className="leading-none">
-              <div className="text-[10px] font-bold tracking-[0.35em] text-gold uppercase" style={{ fontFamily: "var(--font-display)", color: "#c9a84c" }}>Legacy</div>
-              <div className="text-[8px] tracking-[0.5em] text-white/40 uppercase">Club</div>
-            </div>
-          </div>
+          <Link href="/">
+            <CryptoMondaysLogo size={48} />
+          </Link>
 
           {/* Nav links */}
           <div className="hidden md:flex items-center gap-10">
@@ -387,12 +385,8 @@ export default function HomePage() {
 
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <PyramidLogo />
-              <div>
-                <div className="text-[10px] font-bold tracking-[0.35em] uppercase" style={{ fontFamily: "var(--font-display)", color: "#c9a84c" }}>Legacy</div>
-                <div className="text-[8px] tracking-[0.5em] text-white/30 uppercase">Club</div>
-              </div>
+            <div className="mb-4">
+              <CryptoMondaysLogo size={64} />
             </div>
             <p className="text-xs text-white/35 leading-relaxed mb-5">
               The Rooftop at Circa Resort & Casino<br />8 Fremont St, Las Vegas, NV 89101
