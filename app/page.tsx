@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import HeroCarousel from "@/components/HeroCarousel";
 
 function CryptoMondaysLogo({ size = 48 }: { size?: number }) {
   return (
@@ -118,78 +119,7 @@ export default function HomePage() {
       </nav>
 
       {/* ══ HERO ══ */}
-      <section className="relative pt-16 min-h-screen flex items-stretch overflow-hidden">
-        {/* Left: text */}
-        <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 py-20 w-full md:w-[58%] bg-[#060c1a]">
-          <div className="max-w-xl">
-            <h1 className="font-black leading-[0.9] mb-6 uppercase"
-              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 7.5vw, 92px)" }}>
-              <span className="heading-gold block">Crypto</span>
-              <span className="heading-gold block">Mondays</span>
-            </h1>
-
-            <p className="text-sm md:text-base font-light tracking-[0.15em] text-white/65 uppercase mb-10 leading-relaxed max-w-sm">
-              The Premier Crypto Networking<br />Experience in Las Vegas
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-16">
-              <Link
-                href={LUMA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold flex items-center justify-center gap-3 px-8 py-4 text-xs uppercase"
-              >
-                RSVP Now
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
-              <a
-                href="#about"
-                className="btn-outline-gold flex items-center justify-center gap-3 px-8 py-4 text-xs uppercase"
-              >
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.2"/>
-                  <path d="M7.5 6.5L12 9l-4.5 2.5V6.5z" fill="currentColor"/>
-                </svg>
-                Learn More
-              </a>
-            </div>
-
-            {/* Slide indicators */}
-            <div className="flex items-center gap-6">
-              {["01", "02", "03"].map((n, i) => (
-                <div key={n} className="flex flex-col items-center gap-1.5">
-                  <span className={`text-xs font-semibold ${i === 0 ? "text-gold" : "text-white/25"}`}
-                    style={{ color: i === 0 ? "#c9a84c" : undefined }}>
-                    {n}
-                  </span>
-                  {i === 0 && <div className="w-6 h-px bg-[#c9a84c]" />}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right: venue photo */}
-        <div className="hidden md:block md:w-[42%] relative">
-          <Image
-            src="/hero-legacy-club.webp"
-            alt="Legacy Club Rooftop at Circa Resort, Las Vegas"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          {/* Left fade into navy */}
-          <div className="absolute inset-y-0 left-0 w-40 z-10"
-            style={{ background: "linear-gradient(to right, #060c1a, transparent)" }} />
-          {/* Bottom fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 z-10"
-            style={{ background: "linear-gradient(to top, #060c1a, transparent)" }} />
-          {/* Subtle dark overlay for contrast */}
-          <div className="absolute inset-0 z-10" style={{ background: "rgba(4,8,15,0.25)" }} />
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* ══ FEATURE STRIP ══ */}
       <section className="border-y border-[#c9a84c]/10 bg-[#060c1a]">
