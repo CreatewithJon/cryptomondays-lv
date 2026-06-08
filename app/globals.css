@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07080a;
-  --foreground: #f5f0e8;
+  --background: #04080f;
+  --foreground: #f0ead8;
+  --gold: #c9a84c;
+  --gold-bright: #e8c85a;
+  --gold-dim: #8b6a1f;
+  --navy: #04080f;
+  --navy-mid: #0b1535;
+  --navy-light: #0f2050;
 }
 
 @theme inline {
@@ -12,12 +18,96 @@
   --font-mono: var(--font-geist-mono);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-* {
-  box-sizing: border-box;
+/* Gold glow button */
+.btn-gold {
+  background: linear-gradient(135deg, #c9a84c 0%, #e8c85a 50%, #c9a84c 100%);
+  color: #04080f;
+  font-weight: 700;
+  border: 1px solid #e8c85a;
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.25), 0 4px 15px rgba(0,0,0,0.4);
+  transition: all 0.2s ease;
+}
+.btn-gold:hover {
+  box-shadow: 0 0 35px rgba(201, 168, 76, 0.5), 0 4px 20px rgba(0,0,0,0.5);
+  transform: translateY(-1px);
+}
+
+/* Ghost gold button */
+.btn-ghost-gold {
+  background: transparent;
+  color: #c9a84c;
+  font-weight: 600;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  box-shadow: inset 0 0 15px rgba(201, 168, 76, 0.04);
+  transition: all 0.2s ease;
+}
+.btn-ghost-gold:hover {
+  border-color: rgba(201, 168, 76, 0.8);
+  background: rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+}
+
+/* Glass card */
+.glass-card {
+  background: linear-gradient(135deg, rgba(15, 32, 80, 0.6) 0%, rgba(11, 21, 53, 0.8) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  transition: all 0.25s ease;
+}
+.glass-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.08), 0 8px 32px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
+}
+
+/* Gold divider */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+}
+
+/* Subtle gold text glow */
+.gold-text {
+  color: #c9a84c;
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 8, 15, 0.55) 0%,
+    rgba(4, 8, 15, 0.45) 40%,
+    rgba(4, 8, 15, 0.75) 80%,
+    rgba(4, 8, 15, 1) 100%
+  );
+}
+
+/* Animated gold pulse ring */
+@keyframes gold-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.gold-pulse {
+  animation: gold-pulse 2s ease-in-out infinite;
+}
+
+/* Floating ambient glow */
+@keyframes float-glow {
+  0%, 100% { transform: translateY(0px); opacity: 0.6; }
+  50% { transform: translateY(-15px); opacity: 0.9; }
+}
+.float-glow {
+  animation: float-glow 6s ease-in-out infinite;
 }
