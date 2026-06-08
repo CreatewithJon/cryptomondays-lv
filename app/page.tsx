@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const LUMA_URL = "https://luma.com/vgw9t3kt";
+const LUMA_URL = "https://luma.com/CryptoMondaysVegas";
 
 const features = [
   {
