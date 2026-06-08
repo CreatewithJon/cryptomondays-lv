@@ -316,19 +316,7 @@ export default function HomePage() {
             {topics.map((t) => (
               <div
                 key={t.label}
-                className="flex items-center justify-between p-5 rounded-xl group cursor-default transition-all"
-                style={{
-                  background: "rgba(15,32,80,0.3)",
-                  border: "1px solid rgba(201,168,76,0.08)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.25)";
-                  e.currentTarget.style.background = "rgba(201,168,76,0.05)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.08)";
-                  e.currentTarget.style.background = "rgba(15,32,80,0.3)";
-                }}
+                className="flex items-center justify-between p-5 rounded-xl cursor-default transition-all duration-200 topic-row"
               >
                 <span className="text-sm font-medium text-white/75">{t.label}</span>
                 <span className="text-[9px] font-bold tracking-widest text-[#c9a84c]/50 border border-[#c9a84c]/15 px-2 py-0.5 rounded">

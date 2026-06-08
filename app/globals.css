@@ -94,6 +94,16 @@ body {
   );
 }
 
+/* Topic row hover */
+.topic-row {
+  background: rgba(15,32,80,0.3);
+  border: 1px solid rgba(201,168,76,0.08);
+}
+.topic-row:hover {
+  border-color: rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.05);
+}
+
 /* Animated gold pulse ring */
 @keyframes gold-pulse {
   0%, 100% { opacity: 1; }
