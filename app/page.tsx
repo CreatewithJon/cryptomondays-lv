@@ -2,495 +2,475 @@ import Link from "next/link";
 
 const LUMA_URL = "https://luma.com/vgw9t3kt";
 
-const whyAttend = [
+const features = [
   {
-    icon: "◈",
-    title: "High-Signal Conversations",
-    desc: "Skip the noise. Every week surfaces the conversations that matter — from builders working on real infrastructure to investors writing real checks.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="10" cy="9" r="4" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="18" cy="9" r="4" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M4 22c0-3.314 2.686-6 6-6h8c3.314 0 6 2.686 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Elite Networking",
+    desc: "Connect with founders, investors, and innovators.",
   },
   {
-    icon: "◈",
-    title: "The Las Vegas Network",
-    desc: "Las Vegas is becoming a hub for founders and capital. Crypto Mondays is the room where those relationships get built, week after week.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="4" y="16" width="4" height="8" rx="1" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="12" y="10" width="4" height="14" rx="1" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="20" y="4" width="4" height="20" rx="1" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    ),
+    title: "Market Insights",
+    desc: "Stay ahead with expert analysis and trends.",
   },
   {
-    icon: "◈",
-    title: "No Pitch. No Panels.",
-    desc: "No presentations, no keynotes, no ticket tiers. Just a rooftop, a bar, and the right people in the room.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 4C8.477 4 4 8.477 4 14s4.477 10 10 10 10-4.477 10-10S19.523 4 14 4z" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M9 14c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M14 9v2M9 14H7M19 14h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Rooftop Vibes",
+    desc: "Premium cocktails and unmatched views.",
   },
   {
-    icon: "◈",
-    title: "Always Free",
-    desc: "No cover charge. No VIP upsell. The value is the community. RSVP on Luma and show up.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 4l2.5 5 5.5.8-4 3.9.9 5.5L14 16.5 9.1 19.2l.9-5.5L6 9.8l5.5-.8L14 4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+      </svg>
+    ),
+    title: "Exclusive Access",
+    desc: "Members and guests enjoy VIP perks all night.",
   },
 ];
 
-const topics = [
-  { label: "Bitcoin & Lightning Network", tag: "BTC" },
-  { label: "Stablecoins & Real-World Assets", tag: "RWA" },
-  { label: "Prediction Markets & DeFi", tag: "DeFi" },
-  { label: "Web3 Gaming & NFTs", tag: "W3G" },
-  { label: "AI & Emerging Technology", tag: "AI" },
-  { label: "Open Networking & Deals", tag: "NET" },
+const speakers = [
+  {
+    name: "Alberto De Pablo",
+    role: "Co-Founder",
+    company: "Aigentic Systems",
+    bio: "Building AI-native systems and bridging the gap between emerging tech and real-world implementation.",
+    initials: "AD",
+  },
+  {
+    name: "Kathryn Nowak",
+    role: "Community Catalyst",
+    company: "Katalyst",
+    bio: "Connecting builders and investors across the Web3 ecosystem in Las Vegas and beyond.",
+    initials: "KN",
+  },
+  {
+    name: "Dr. Kenneth A. Cottrell",
+    role: "Co-Founder",
+    company: "Aigentic Systems",
+    bio: "AI researcher and business strategist driving the next wave of intelligent enterprise systems.",
+    initials: "KC",
+  },
 ];
 
-const audience = [
-  { title: "Founders & Builders", desc: "Building in crypto, AI, Web3, or emerging tech." },
-  { title: "Investors & VCs", desc: "Sourcing deals and co-investors on the ground." },
-  { title: "Conference Attendees", desc: "In Vegas for an event? This is your Monday." },
-  { title: "Crypto-Curious", desc: "Exploring the space — no experience required." },
-];
-
-const organizers = [
-  { name: "Alberto De Pablo", handle: "@PowerfullApe", initials: "AD" },
-  { name: "Kathryn Nowak", handle: "@Katalyst", initials: "KN" },
-  { name: "Dr. Kenneth A. Cottrell", handle: "D.P.P., M.A.", initials: "KC" },
-];
+// Pyramid logo SVG
+function PyramidLogo() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <polygon points="16,2 30,28 2,28" stroke="#c9a84c" strokeWidth="1.5" fill="none"/>
+      <polygon points="16,10 24,28 8,28" stroke="#c9a84c" strokeWidth="1" fill="rgba(201,168,76,0.08)"/>
+      <line x1="16" y1="2" x2="16" y2="28" stroke="#c9a84c" strokeWidth="0.75" strokeOpacity="0.5"/>
+    </svg>
+  );
+}
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#04080f] text-[#f0ead8] overflow-x-hidden" style={{ fontFamily: "var(--font-sans)" }}>
+    <div className="min-h-screen bg-[#060c1a] text-[#f0ead8]">
 
-      {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#c9a84c]/10 bg-[#04080f]/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg border border-[#c9a84c]/40 flex items-center justify-center">
-              <span className="gold-text font-bold text-sm">₿</span>
-            </div>
-            <div>
-              <span className="text-sm font-semibold tracking-wide text-white/90">Crypto</span>
-              <span className="text-sm font-semibold tracking-wide gold-text">Mondays</span>
-              <span className="text-xs text-white/30 ml-1.5 tracking-wider">LAS VEGAS</span>
+      {/* ══ NAV ══ */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#060c1a]/90 backdrop-blur-xl border-b border-[#c9a84c]/10">
+        <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-2.5">
+            <PyramidLogo />
+            <div className="leading-none">
+              <div className="text-[10px] font-bold tracking-[0.35em] text-gold uppercase" style={{ fontFamily: "var(--font-display)", color: "#c9a84c" }}>Legacy</div>
+              <div className="text-[8px] tracking-[0.5em] text-white/40 uppercase">Club</div>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-8">
-            {["About", "Venue", "Topics", "Organizers"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-xs font-medium uppercase tracking-[0.15em] text-white/45 hover:text-[#c9a84c] transition-colors"
-              >
-                {item}
-              </a>
+
+          {/* Nav links */}
+          <div className="hidden md:flex items-center gap-10">
+            {["Events", "About", "Experience", "Speakers", "Contact"].map((l) => (
+              <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l}</a>
             ))}
           </div>
+
+          {/* RSVP */}
           <Link
             href={LUMA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-gold text-xs px-5 py-2.5 rounded-lg tracking-wide uppercase"
+            className="btn-outline-gold text-[10px] font-bold px-6 py-2.5 rounded-none uppercase"
+            style={{ letterSpacing: "0.2em" }}
           >
-            RSVP Free
+            RSVP Now
           </Link>
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">
+      {/* ══ HERO ══ */}
+      <section className="relative pt-16 min-h-screen flex items-stretch overflow-hidden">
+        {/* Left: text */}
+        <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-24 py-20 w-full md:w-1/2 bg-[#060c1a]">
+          <div className="max-w-xl">
+            <p className="text-[10px] font-semibold tracking-[0.35em] text-gold uppercase mb-6"
+              style={{ color: "#c9a84c", fontFamily: "var(--font-display)" }}>
+              Legacy Club Presents
+            </p>
 
-        {/* === REPLACE THIS WITH REAL LEGACY CLUB / LAS VEGAS SKYLINE PHOTO ===
-            Use a full-bleed image of the Legacy Club rooftop or Las Vegas skyline at night.
-            Recommended: next/image with fill prop and object-cover, z-index -10.
-            Dark navy overlay should sit above the image (hero-overlay class below).
-        */}
+            <h1 className="font-black leading-[0.9] mb-6 uppercase"
+              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(64px, 9vw, 110px)" }}>
+              <span className="heading-gold block">Crypto</span>
+              <span className="heading-gold block">Mondays</span>
+            </h1>
 
-        {/* Background gradient — placeholder until real photo is added */}
-        <div className="absolute inset-0 z-0"
-          style={{
-            background: "radial-gradient(ellipse at 50% 40%, #0f2050 0%, #080d20 45%, #04080f 100%)",
-          }}
-        />
+            <p className="text-sm md:text-base font-light tracking-[0.15em] text-white/65 uppercase mb-10 leading-relaxed max-w-sm">
+              The Premier Crypto Networking<br />Experience in Las Vegas
+            </p>
 
-        {/* Ambient glows */}
-        <div className="float-glow absolute top-1/4 left-1/3 w-[500px] h-[300px] rounded-full blur-[120px] z-0 pointer-events-none"
-          style={{ background: "rgba(201,168,76,0.06)" }} />
-        <div className="float-glow absolute bottom-1/3 right-1/4 w-[350px] h-[350px] rounded-full blur-[100px] z-0 pointer-events-none"
-          style={{ background: "rgba(15,32,80,0.8)", animationDelay: "3s" }} />
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <Link
+                href={LUMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold flex items-center justify-center gap-3 px-8 py-4 text-xs uppercase"
+              >
+                RSVP Now
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+              <a
+                href="#about"
+                className="btn-outline-gold flex items-center justify-center gap-3 px-8 py-4 text-xs uppercase"
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.2"/>
+                  <path d="M7.5 6.5L12 9l-4.5 2.5V6.5z" fill="currentColor"/>
+                </svg>
+                Learn More
+              </a>
+            </div>
 
-        {/* Thin gold horizontal line */}
-        <div className="absolute top-0 left-0 right-0 h-px z-10"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent)" }} />
-
-        <div className="relative z-10 max-w-4xl mx-auto">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-[#c9a84c]/25 mb-10"
-            style={{ background: "rgba(201,168,76,0.06)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c] gold-pulse inline-block" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c9a84c]/80">
-              Every Monday · Legacy Club · Circa Resort · Free
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="text-6xl md:text-8xl font-bold tracking-[-0.02em] leading-[0.95] mb-6"
-            style={{ fontFamily: "var(--font-display)" }}>
-            <span className="text-white">Crypto</span>
-            <br />
-            <span style={{
-              background: "linear-gradient(135deg, #c9a84c 0%, #e8c85a 40%, #f0d070 60%, #c9a84c 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}>
-              Mondays
-            </span>
-            <br />
-            <span className="text-white/80 text-5xl md:text-6xl">Las Vegas</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-base md:text-lg text-white/55 max-w-2xl mx-auto mb-4 leading-relaxed font-light">
-            An elevated rooftop networking experience for crypto, AI, Web3,
-            and emerging technology builders.
-          </p>
-
-          {/* Venue tag */}
-          <p className="text-xs text-[#c9a84c]/60 tracking-[0.2em] uppercase mb-10 font-medium">
-            Hosted at Legacy Club &nbsp;·&nbsp; Circa Resort & Casino &nbsp;·&nbsp; Las Vegas
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={LUMA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold px-10 py-4 rounded-xl text-sm tracking-widest uppercase"
-            >
-              RSVP Now
-            </Link>
-            <a
-              href="#about"
-              className="btn-ghost-gold px-10 py-4 rounded-xl text-sm tracking-widest uppercase"
-            >
-              View Details
-            </a>
+            {/* Slide indicators */}
+            <div className="flex items-center gap-6">
+              {["01", "02", "03"].map((n, i) => (
+                <div key={n} className="flex flex-col items-center gap-1.5">
+                  <span className={`text-xs font-semibold ${i === 0 ? "text-gold" : "text-white/25"}`}
+                    style={{ color: i === 0 ? "#c9a84c" : undefined }}>
+                    {n}
+                  </span>
+                  {i === 0 && <div className="w-6 h-px bg-[#c9a84c]" />}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-30">
-          <span className="text-[9px] uppercase tracking-[0.3em] text-white/60">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-[#c9a84c] to-transparent" />
+        {/* Right: venue photo */}
+        <div className="hidden md:block md:w-1/2 relative">
+          {/*
+            === REPLACE THIS ENTIRE DIV with a next/image ===
+            <Image src="/hero-legacy-club.jpg" alt="Legacy Club Las Vegas" fill className="object-cover object-center" priority />
+            Add a dark overlay div on top: className="absolute inset-0 bg-gradient-to-r from-[#060c1a] to-transparent z-10"
+          */}
+          <div className="absolute inset-0"
+            style={{ background: "linear-gradient(135deg, #0a1428 0%, #0f1e45 35%, #142050 60%, #0a1428 100%)" }}>
+            {/* Ambient glow */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-40"
+              style={{ background: "radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.15) 0%, transparent 65%)" }} />
+            {/* Placeholder label */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center px-8">
+                <div className="text-[9px] uppercase tracking-[0.4em] text-white/15 mb-2">Replace with</div>
+                <div className="text-[9px] uppercase tracking-[0.4em] text-white/15">Legacy Club rooftop photo</div>
+              </div>
+            </div>
+          </div>
+          {/* Left fade */}
+          <div className="absolute inset-y-0 left-0 w-24 z-10"
+            style={{ background: "linear-gradient(to right, #060c1a, transparent)" }} />
         </div>
       </section>
 
-      {/* ── STATS STRIP ── */}
-      <div className="gold-divider" />
-      <section className="py-10 px-6" style={{ background: "rgba(11,21,53,0.4)" }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { label: "When", value: "Every Monday", sub: "6:30 – 8:30 PM PT" },
-            { label: "Venue", value: "Legacy Club", sub: "Rooftop · Circa Resort" },
-            { label: "Location", value: "Downtown LV", sub: "Las Vegas, Nevada" },
-            { label: "Admission", value: "Free", sub: "RSVP on Luma" },
-          ].map((d) => (
-            <div key={d.label} className="text-center">
-              <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#c9a84c]/60 mb-1.5">{d.label}</div>
-              <div className="text-base font-bold text-white">{d.value}</div>
-              <div className="text-xs text-white/35 mt-0.5">{d.sub}</div>
+      {/* ══ FEATURE STRIP ══ */}
+      <section className="border-y border-[#c9a84c]/10 bg-[#060c1a]">
+        <div className="max-w-6xl mx-auto px-8 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {features.map((f) => (
+            <div key={f.title} className="flex items-start gap-4">
+              <div className="text-[#c9a84c] flex-shrink-0 mt-0.5 opacity-80">{f.icon}</div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-1.5">{f.title}</div>
+                <p className="text-xs text-white/45 leading-relaxed">{f.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
-      <div className="gold-divider" />
 
-      {/* ── ABOUT ── */}
-      <section id="about" className="py-32 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-5">About</div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-6 text-white"
-              style={{ fontFamily: "var(--font-display)" }}>
-              Where Las Vegas&apos;
-              <br />
-              <span style={{
-                background: "linear-gradient(90deg, #c9a84c, #e8c85a)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-                crypto community
-              </span>
-              <br />
-              meets.
-            </h2>
-            <p className="text-sm text-white/55 leading-relaxed mb-4">
-              Crypto Mondays Vegas is a weekly gathering at the Legacy Club — the rooftop lounge atop Circa Resort & Casino in the heart of Downtown Las Vegas. It&apos;s where serious people in crypto, AI, and Web3 come to connect, share intelligence, and build relationships that matter.
-            </p>
-            <p className="text-sm text-white/55 leading-relaxed">
-              No decks. No panels. No gatekeeping. Just an open, high-signal room every Monday night with the best view in the city.
-            </p>
-          </div>
+      {/* ══ EVENT DETAILS ══ */}
+      <section id="events" className="py-24 px-8 bg-[#060c1a]">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#c9a84c]/12 rounded-sm overflow-hidden">
 
-          {/* Venue card */}
-          <div id="venue" className="glass-card rounded-2xl p-8">
-            {/* === REPLACE: Add actual Legacy Club rooftop photo here === */}
-            <div className="w-full h-44 rounded-xl mb-6 flex items-end p-4 overflow-hidden relative"
-              style={{
-                background: "linear-gradient(135deg, #0b1535 0%, #0f2050 50%, #1a2f6b 100%)",
-                border: "1px solid rgba(201,168,76,0.15)",
-              }}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-white/20 font-medium text-center px-4">
-                  [ Replace with Legacy Club rooftop photo ]
-                </p>
-              </div>
-              <div className="relative z-10">
-                <div className="text-[9px] uppercase tracking-[0.25em] text-[#c9a84c]/70 font-semibold">Rooftop Lounge</div>
-                <div className="text-sm font-bold text-white">Legacy Club at Circa</div>
-              </div>
-            </div>
+          {/* Left: info */}
+          <div className="p-10 bg-[#0a1428] border-r border-[#c9a84c]/10 flex flex-col justify-between">
+            <div>
+              <p className="text-[9px] uppercase tracking-[0.35em] text-[#c9a84c] mb-4">Every Monday</p>
+              <h2 className="font-black text-white mb-6 leading-none"
+                style={{ fontFamily: "var(--font-display)", fontSize: "48px" }}>
+                6:30PM –<br />8:30PM
+              </h2>
 
-            <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#c9a84c]/60 mb-3">Venue Details</div>
-            <h3 className="text-xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>Legacy Club</h3>
-            <p className="text-xs text-white/40 mb-5">Circa Resort & Casino · Downtown Las Vegas</p>
+              <div className="gold-line mb-6" />
 
-            <div className="space-y-3 mb-6">
-              {[
-                { icon: "◈", text: "Every Monday evening" },
-                { icon: "◈", text: "6:30 PM – 8:30 PM Pacific Time" },
-                { icon: "◈", text: "Free admission — RSVP via Luma" },
-                { icon: "◈", text: "Full bar & rooftop lounge atmosphere" },
-              ].map((item) => (
-                <div key={item.text} className="flex items-center gap-3 text-sm text-white/60">
-                  <span className="text-[#c9a84c]/60 text-xs">{item.icon}</span>
-                  <span>{item.text}</span>
+              <div className="flex items-start gap-3 mb-3">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0 mt-0.5">
+                  <path d="M7 1.5C4.515 1.5 2.5 3.515 2.5 6c0 3.375 4.5 7 4.5 7s4.5-3.625 4.5-7c0-2.485-2.015-4.5-4.5-4.5z" stroke="#c9a84c" strokeWidth="1.2"/>
+                  <circle cx="7" cy="6" r="1.5" stroke="#c9a84c" strokeWidth="1.2"/>
+                </svg>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-0.5">Legacy Club Rooftop</div>
+                  <div className="text-xs text-white/40 leading-relaxed">The Rooftop at Circa Resort & Casino<br />8 Fremont St, Las Vegas, NV 89101</div>
                 </div>
-              ))}
+              </div>
             </div>
 
             <Link
               href={LUMA_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold block text-center py-3.5 rounded-xl text-xs tracking-[0.2em] uppercase"
+              className="btn-gold flex items-center justify-center gap-3 py-4 text-xs uppercase mt-8"
             >
-              Reserve Your Spot
+              RSVP Now
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Link>
           </div>
-        </div>
-      </section>
 
-      {/* ── WHY ATTEND ── */}
-      <div className="gold-divider" />
-      <section className="py-32 px-6" style={{ background: "rgba(11,21,53,0.25)" }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-4">Why Attend</div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white"
-              style={{ fontFamily: "var(--font-display)" }}>
-              Built for people who
-              <br />
-              move markets.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {whyAttend.map((item) => (
-              <div key={item.title} className="glass-card rounded-2xl p-7">
-                <div className="text-[#c9a84c] text-xl mb-4 opacity-70">{item.icon}</div>
-                <h3 className="text-base font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+          {/* Center: Bitcoin visual */}
+          <div className="flex items-center justify-center p-10 bg-[#08112a] border-r border-[#c9a84c]/10 relative overflow-hidden">
+            <div className="absolute inset-0"
+              style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%)" }} />
+            {/*
+              === REPLACE with actual 3D Bitcoin coin image ===
+              <Image src="/bitcoin-coin.png" alt="Bitcoin" width={220} height={220} className="relative z-10" />
+            */}
+            <div className="relative z-10 flex flex-col items-center gap-4">
+              <div className="w-40 h-40 rounded-full flex items-center justify-center bitcoin-glow"
+                style={{
+                  background: "linear-gradient(135deg, #b8922e 0%, #e8c465 40%, #f0d070 60%, #b8922e 100%)",
+                  fontSize: "72px",
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 900,
+                  color: "#06080f",
+                  textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                }}>
+                ₿
               </div>
-            ))}
+              <div className="gold-line w-24" />
+              <p className="text-[9px] uppercase tracking-[0.3em] text-white/25">[ Replace with 3D coin image ]</p>
+            </div>
+          </div>
+
+          {/* Right: copy */}
+          <div className="p-10 bg-[#0a1428] flex flex-col justify-center">
+            <h3 className="font-bold text-white leading-tight mb-5 uppercase"
+              style={{ fontFamily: "var(--font-display)", fontSize: "28px", color: "#c9a84c" }}>
+              Elevate Your<br />Network
+            </h3>
+            <p className="text-sm text-white/55 leading-relaxed">
+              Join the most influential minds in crypto for curated conversations, premium drinks, and unforgettable views over the Las Vegas skyline.
+            </p>
           </div>
         </div>
       </section>
-      <div className="gold-divider" />
 
-      {/* ── TOPICS ── */}
-      <section id="topics" className="py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-14">
-            <div className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-4">Weekly Topics</div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white"
-              style={{ fontFamily: "var(--font-display)" }}>
-              The conversations
-              <br />shaping the future.
-            </h2>
+      {/* ══ SPEAKERS ══ */}
+      <section id="speakers" className="py-24 px-8 bg-[#060c1a]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center gap-6">
+              <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-white"
+                style={{ fontFamily: "var(--font-display)" }}>
+                Featured Organizers
+              </h2>
+              <div className="flex-1 h-px bg-[#c9a84c]/15 w-24 md:w-48" />
+            </div>
+            <div className="flex gap-2">
+              {["←", "→"].map((arrow) => (
+                <button key={arrow}
+                  className="w-8 h-8 rounded-full border border-[#c9a84c]/25 flex items-center justify-center text-[#c9a84c]/60 hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all text-xs">
+                  {arrow}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {topics.map((t) => (
-              <div
-                key={t.label}
-                className="flex items-center justify-between p-5 rounded-xl cursor-default transition-all duration-200 topic-row"
-              >
-                <span className="text-sm font-medium text-white/75">{t.label}</span>
-                <span className="text-[9px] font-bold tracking-widest text-[#c9a84c]/50 border border-[#c9a84c]/15 px-2 py-0.5 rounded">
-                  {t.tag}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-xs text-white/20 mt-8 text-center tracking-wide">
-            All discussions are for educational and networking purposes only — not financial advice.
-          </p>
-        </div>
-      </section>
-
-      {/* ── WHO ATTENDS ── */}
-      <div className="gold-divider" />
-      <section className="py-32 px-6" style={{ background: "rgba(11,21,53,0.25)" }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-4">The Room</div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white"
-              style={{ fontFamily: "var(--font-display)" }}>
-              Who shows up
-              <br />every Monday.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-            {audience.map((a) => (
-              <div key={a.title} className="glass-card rounded-2xl p-6 text-center">
-                <div className="w-10 h-10 rounded-xl border border-[#c9a84c]/20 flex items-center justify-center mx-auto mb-4"
-                  style={{ background: "rgba(201,168,76,0.06)" }}>
-                  <span className="gold-text text-lg">◈</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {speakers.map((s) => (
+              <div key={s.name} className="card-navy p-6 rounded-sm">
+                <div className="flex items-center gap-4 mb-4">
+                  {/*
+                    === REPLACE initials div with real headshot ===
+                    <Image src={`/${s.slug}.jpg`} alt={s.name} width={56} height={56} className="rounded-full speaker-avatar object-cover" />
+                  */}
+                  <div className="w-14 h-14 rounded-full speaker-avatar flex items-center justify-center text-sm font-bold flex-shrink-0"
+                    style={{
+                      background: "linear-gradient(135deg, #0f2050, #1a2f6b)",
+                      color: "#c9a84c",
+                      fontFamily: "var(--font-display)",
+                    }}>
+                    {s.initials}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white tracking-wide uppercase"
+                      style={{ fontFamily: "var(--font-display)", fontSize: "11px", letterSpacing: "0.15em" }}>
+                      {s.name}
+                    </h3>
+                    <p className="text-[10px] text-[#c9a84c]/70 tracking-wide uppercase mt-0.5">
+                      {s.role}, {s.company}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-sm font-bold text-white mb-2">{a.title}</h3>
-                <p className="text-xs text-white/45 leading-relaxed">{a.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <div className="gold-divider" />
-
-      {/* ── ORGANIZERS ── */}
-      <section id="organizers" className="py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-4">Organized By</div>
-            <h2 className="text-4xl font-bold tracking-tight text-white"
-              style={{ fontFamily: "var(--font-display)" }}>
-              The team behind the meetup.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {organizers.map((o) => (
-              <div key={o.name} className="glass-card rounded-2xl p-8 flex flex-col items-center text-center">
-                {/* === REPLACE: swap initials div with real headshot photo === */}
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-lg font-bold mb-5 border border-[#c9a84c]/20"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(15,32,80,0.6) 100%)",
-                    color: "#c9a84c",
-                    fontFamily: "var(--font-display)",
-                  }}>
-                  {o.initials}
-                </div>
-                <h3 className="text-sm font-bold text-white mb-1">{o.name}</h3>
-                <p className="text-xs text-[#c9a84c]/60">{o.handle}</p>
+                <p className="text-xs text-white/45 leading-relaxed mb-5">{s.bio}</p>
+                {/* LinkedIn icon */}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="opacity-30 hover:opacity-70 cursor-pointer transition-opacity">
+                  <rect x="1" y="1" width="14" height="14" rx="2" stroke="#c9a84c" strokeWidth="1.2"/>
+                  <path d="M4 6.5v5M4 4.5v.5M7 11.5V9c0-1.105.895-2 2-2s2 .895 2 2v2.5M7 6.5v5" stroke="#c9a84c" strokeWidth="1.2" strokeLinecap="round"/>
+                </svg>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── RSVP CTA ── */}
-      <div className="gold-divider" />
-      <section className="py-36 px-6 relative overflow-hidden" style={{ background: "rgba(11,21,53,0.4)" }}>
-        <div className="absolute inset-0 z-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%)",
-          }} />
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <div className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-5">Join Us</div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.0] mb-5 text-white"
-            style={{ fontFamily: "var(--font-display)" }}>
-            See you{" "}
-            <span style={{
-              background: "linear-gradient(135deg, #c9a84c, #e8c85a, #c9a84c)",
+      {/* ══ QUOTE / WAVE ══ */}
+      <section className="wave-bg py-28 px-8 text-center relative">
+        {/* Wave lines */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-20 pointer-events-none overflow-hidden">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="absolute left-0 right-0"
+              style={{
+                bottom: `${i * 10}px`,
+                height: "1px",
+                background: `linear-gradient(90deg, transparent, rgba(201,168,76,${0.3 - i * 0.05}), transparent)`,
+                transform: `scaleX(${0.6 + i * 0.1})`,
+              }} />
+          ))}
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <h2 className="font-bold uppercase leading-tight mb-5"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 4vw, 46px)",
+              background: "linear-gradient(135deg, #c9a84c 0%, #e8c465 50%, #c9a84c 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              letterSpacing: "0.05em",
             }}>
-              Monday.
-            </span>
+            Where Connections Are Made<br />And The Future Is Built.
           </h2>
-          <p className="text-base text-white/45 mb-3 font-light">
-            Every Monday. 6:30 PM. Legacy Club rooftop. No cover.
-          </p>
-          <p className="text-xs text-[#c9a84c]/50 tracking-[0.2em] uppercase mb-12">
-            Circa Resort & Casino · Downtown Las Vegas
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={LUMA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold px-12 py-4 rounded-xl text-sm tracking-[0.2em] uppercase"
-            >
-              RSVP — It&apos;s Free
-            </Link>
-            <Link
-              href={LUMA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost-gold px-12 py-4 rounded-xl text-sm tracking-[0.2em] uppercase"
-            >
-              View on Luma
-            </Link>
+          <div className="flex items-center justify-center gap-4 mb-2">
+            <div className="h-px w-16 bg-[#c9a84c]/30" />
+            <p className="text-[10px] uppercase tracking-[0.35em] text-[#c9a84c]/50">Legacy Is More Than A View.</p>
+            <div className="h-px w-16 bg-[#c9a84c]/30" />
           </div>
         </div>
       </section>
-      <div className="gold-divider" />
 
-      {/* ── FOOTER ── */}
-      <footer className="py-12 px-6 bg-[#04080f]">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg border border-[#c9a84c]/30 flex items-center justify-center">
-                <span className="gold-text font-bold text-sm">₿</span>
-              </div>
+      {/* ══ FOOTER ══ */}
+      <footer className="bg-[#040810] border-t border-[#c9a84c]/10 pt-16 pb-8 px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-2.5 mb-4">
+              <PyramidLogo />
               <div>
-                <span className="text-sm font-semibold text-white/80">Crypto</span>
-                <span className="text-sm font-semibold gold-text">Mondays</span>
-                <span className="text-xs text-white/25 ml-1.5 tracking-widest">LAS VEGAS</span>
+                <div className="text-[10px] font-bold tracking-[0.35em] uppercase" style={{ fontFamily: "var(--font-display)", color: "#c9a84c" }}>Legacy</div>
+                <div className="text-[8px] tracking-[0.5em] text-white/30 uppercase">Club</div>
               </div>
             </div>
-
-            <div className="flex gap-8">
-              {["About", "Venue", "Topics", "Organizers"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-xs text-white/30 hover:text-[#c9a84c] transition-colors tracking-wide uppercase"
-                >
-                  {item}
-                </a>
+            <p className="text-xs text-white/35 leading-relaxed mb-5">
+              The Rooftop at Circa Resort & Casino<br />8 Fremont St, Las Vegas, NV 89101
+            </p>
+            <div className="flex gap-3">
+              {[
+                <svg key="ig" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" strokeWidth="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2"/><circle cx="11.5" cy="4.5" r="0.8" fill="currentColor"/></svg>,
+                <svg key="x" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l5.2 5.5L2 14h1.8l3.8-4.3L11.5 14H14l-5.5-5.8L14 2h-1.8L7.6 6l-3.8-4H2z" fill="currentColor"/></svg>,
+                <svg key="li" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.2"/><path d="M4 6.5v5M4 4.5v.5M7 11.5V9c0-1.105.895-2 2-2s2 .895 2 2v2.5M7 6.5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
+              ].map((icon, i) => (
+                <a key={i} href="#" className="text-white/30 hover:text-[#c9a84c] transition-colors">{icon}</a>
               ))}
             </div>
-
-            <Link
-              href={LUMA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost-gold text-xs px-5 py-2 rounded-lg tracking-[0.15em] uppercase"
-            >
-              RSVP →
-            </Link>
           </div>
 
-          <div className="gold-divider mb-8" />
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-5">Quick Links</h4>
+            <ul className="space-y-3">
+              {["Events", "About", "Experience", "Speakers", "Contact"].map((l) => (
+                <li key={l}>
+                  <a href={`#${l.toLowerCase()}`} className="text-xs text-white/40 hover:text-white/80 transition-colors uppercase tracking-wide">{l}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center">
-            <p className="text-xs text-white/20 tracking-wide">
-              Every Monday · Legacy Club · Circa Resort & Casino · Downtown Las Vegas
+          {/* Event Info */}
+          <div>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-5">Event Info</h4>
+            <ul className="space-y-3">
+              {["RSVP Free", "Every Monday", "6:30 – 8:30 PM", "Legacy Club Rooftop", "Circa Resort & Casino"].map((l) => (
+                <li key={l} className="text-xs text-white/40 uppercase tracking-wide">{l}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c9a84c] mb-5">Stay Connected</h4>
+            <p className="text-xs text-white/40 leading-relaxed mb-4">
+              Get updates on upcoming events and exclusive invites.
             </p>
-            <p className="text-xs text-white/15">
-              © {new Date().getFullYear()} Crypto Mondays LV · Independently organized
-            </p>
-            <p className="text-xs text-white/15">
-              Not affiliated with Circa Resort · Not financial advice
-            </p>
+            <div className="flex border border-[#c9a84c]/20 overflow-hidden">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 bg-transparent px-4 py-3 text-xs text-white/70 placeholder-white/25 focus:outline-none"
+              />
+              <button className="px-4 bg-[#c9a84c]/10 border-l border-[#c9a84c]/20 hover:bg-[#c9a84c]/20 transition-colors">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="gold-line mb-6" />
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-[10px] text-white/20 tracking-wide">
+            © {new Date().getFullYear()} Crypto Mondays LV. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            {["Privacy Policy", "Terms of Service"].map((l) => (
+              <a key={l} href="#" className="text-[10px] text-white/20 hover:text-white/50 transition-colors tracking-wide uppercase">{l}</a>
+            ))}
           </div>
         </div>
       </footer>

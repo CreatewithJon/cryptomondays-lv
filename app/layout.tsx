@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const cinzel = Cinzel({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "600", "700", "800", "900"],
 });
 
 const inter = Inter({
@@ -15,14 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Crypto Mondays Las Vegas — Rooftop Networking at Legacy Club",
+  title: "Crypto Mondays Las Vegas — The Premier Crypto Networking Experience",
   description:
-    "An elevated rooftop networking experience for crypto, AI, Web3, and emerging technology builders. Every Monday at Legacy Club, Circa Resort & Casino, Downtown Las Vegas.",
-  openGraph: {
-    title: "Crypto Mondays Las Vegas",
-    description: "Rooftop crypto networking at Legacy Club, Circa Resort & Casino. Every Monday. Free admission.",
-    siteName: "Crypto Mondays LV",
-  },
+    "Every Monday at Legacy Club Rooftop, Circa Resort & Casino, Downtown Las Vegas. The premier crypto networking experience for founders, investors, and builders.",
 };
 
 export default function RootLayout({
@@ -31,11 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-[#04080f] text-[#f0ead8]">{children}</body>
+    <html lang="en" className={`${cinzel.variable} ${inter.variable} antialiased`}>
+      <body className="bg-[#060c1a] text-[#f0ead8]">{children}</body>
     </html>
   );
 }

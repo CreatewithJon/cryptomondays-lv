@@ -1,123 +1,126 @@
 @import "tailwindcss";
 
 :root {
-  --background: #04080f;
-  --foreground: #f0ead8;
   --gold: #c9a84c;
-  --gold-bright: #e8c85a;
-  --gold-dim: #8b6a1f;
-  --navy: #04080f;
-  --navy-mid: #0b1535;
-  --navy-light: #0f2050;
+  --gold-bright: #e8c465;
+  --gold-dim: rgba(201, 168, 76, 0.5);
+  --navy: #060c1a;
+  --navy-mid: #0a1428;
+  --navy-card: #0d1a35;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--navy);
+  --color-foreground: #f0ead8;
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background: var(--navy);
+  color: #f0ead8;
+  font-family: var(--font-sans), Arial, sans-serif;
 }
 
-/* Gold glow button */
+/* ── BUTTONS ── */
 .btn-gold {
-  background: linear-gradient(135deg, #c9a84c 0%, #e8c85a 50%, #c9a84c 100%);
-  color: #04080f;
+  background: linear-gradient(135deg, #b8922e 0%, #e8c465 50%, #b8922e 100%);
+  color: #060c1a;
   font-weight: 700;
-  border: 1px solid #e8c85a;
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.25), 0 4px 15px rgba(0,0,0,0.4);
+  border: none;
+  box-shadow: 0 0 24px rgba(201,168,76,0.3), 0 4px 16px rgba(0,0,0,0.5);
   transition: all 0.2s ease;
+  letter-spacing: 0.12em;
 }
 .btn-gold:hover {
-  box-shadow: 0 0 35px rgba(201, 168, 76, 0.5), 0 4px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 0 40px rgba(201,168,76,0.55), 0 4px 20px rgba(0,0,0,0.6);
   transform: translateY(-1px);
+  filter: brightness(1.08);
 }
 
-/* Ghost gold button */
-.btn-ghost-gold {
+.btn-outline-gold {
   background: transparent;
-  color: #c9a84c;
-  font-weight: 600;
-  border: 1px solid rgba(201, 168, 76, 0.4);
-  box-shadow: inset 0 0 15px rgba(201, 168, 76, 0.04);
+  color: #f0ead8;
+  border: 1px solid rgba(201,168,76,0.5);
   transition: all 0.2s ease;
+  letter-spacing: 0.1em;
 }
-.btn-ghost-gold:hover {
-  border-color: rgba(201, 168, 76, 0.8);
-  background: rgba(201, 168, 76, 0.08);
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
-}
-
-/* Glass card */
-.glass-card {
-  background: linear-gradient(135deg, rgba(15, 32, 80, 0.6) 0%, rgba(11, 21, 53, 0.8) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 168, 76, 0.12);
-  transition: all 0.25s ease;
-}
-.glass-card:hover {
-  border-color: rgba(201, 168, 76, 0.3);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.08), 0 8px 32px rgba(0,0,0,0.4);
-  transform: translateY(-2px);
-}
-
-/* Gold divider */
-.gold-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
-}
-
-/* Subtle gold text glow */
-.gold-text {
-  color: #c9a84c;
-  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
-}
-
-/* Hero gradient overlay */
-.hero-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(4, 8, 15, 0.55) 0%,
-    rgba(4, 8, 15, 0.45) 40%,
-    rgba(4, 8, 15, 0.75) 80%,
-    rgba(4, 8, 15, 1) 100%
-  );
-}
-
-/* Topic row hover */
-.topic-row {
-  background: rgba(15,32,80,0.3);
-  border: 1px solid rgba(201,168,76,0.08);
-}
-.topic-row:hover {
-  border-color: rgba(201,168,76,0.25);
+.btn-outline-gold:hover {
+  border-color: var(--gold);
+  color: var(--gold);
   background: rgba(201,168,76,0.05);
 }
 
-/* Animated gold pulse ring */
-@keyframes gold-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+/* ── CARDS ── */
+.card-navy {
+  background: var(--navy-card);
+  border: 1px solid rgba(201,168,76,0.12);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.gold-pulse {
-  animation: gold-pulse 2s ease-in-out infinite;
+.card-navy:hover {
+  border-color: rgba(201,168,76,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-/* Floating ambient glow */
-@keyframes float-glow {
-  0%, 100% { transform: translateY(0px); opacity: 0.6; }
-  50% { transform: translateY(-15px); opacity: 0.9; }
+/* ── DIVIDERS ── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.4) 30%, rgba(201,168,76,0.6) 50%, rgba(201,168,76,0.4) 70%, transparent 100%);
 }
-.float-glow {
-  animation: float-glow 6s ease-in-out infinite;
+
+/* ── GOLD TEXT ── */
+.text-gold {
+  color: var(--gold);
 }
+.heading-gold {
+  background: linear-gradient(135deg, #b8922e 0%, #e8c465 40%, #f0d070 60%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── HERO PHOTO SIDE ── */
+.hero-photo-side {
+  background: linear-gradient(135deg, #0a1428 0%, #111e3d 40%, #0d1535 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── BITCOIN GLOW ── */
+.bitcoin-glow {
+  box-shadow: 0 0 60px rgba(201,168,76,0.4), 0 0 120px rgba(201,168,76,0.15);
+}
+
+/* ── WAVE BG ── */
+.wave-bg {
+  background: linear-gradient(180deg, #060c1a 0%, #08112a 50%, #060c1a 100%);
+  position: relative;
+  overflow: hidden;
+}
+.wave-bg::before {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── SPEAKER AVATAR ── */
+.speaker-avatar {
+  border: 2px solid rgba(201,168,76,0.4);
+  box-shadow: 0 0 16px rgba(201,168,76,0.15);
+}
+
+/* ── NAV LINK ── */
+.nav-link {
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--gold); }
