@@ -81,6 +81,22 @@ export default function TheRoom() {
           </p>
         </div>
 
+        {/* Hero crowd photo — full width */}
+        <div className="relative overflow-hidden border border-[#c9a84c]/20 mb-3 group" style={{ aspectRatio: "21/9" }}>
+          <Image
+            src="/attendees-crowd.jpg"
+            alt="Crypto Mondays Las Vegas — packed rooftop crowd at sunset"
+            fill
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060c1a]/70 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute bottom-5 left-6 z-10 flex items-center gap-3">
+            <span className="ecosystem-tag">Live From The Rooftop</span>
+            <span className="ecosystem-tag">Legacy Club · Circa Resort</span>
+          </div>
+          <div className="absolute inset-0 border border-[#c9a84c]/0 group-hover:border-[#c9a84c]/30 transition-all duration-300 pointer-events-none" />
+        </div>
+
         {/* 3-column masonry gallery */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10">
           {/* Column 1 */}

@@ -13,6 +13,11 @@ const slides = [
     sub: "The Premier Crypto, AI & Emerging\nTechnology Community in Las Vegas",
   },
   {
+    src: "/attendees-crowd.jpg",
+    alt: "Packed rooftop crowd at Crypto Mondays Las Vegas",
+    sub: "100+ Founders, Investors & Builders.\nEvery Monday Night.",
+  },
+  {
     src: "/hero-legacy-club-interior.jpg",
     alt: "Legacy Club interior lounge at sunset",
     sub: "Every Monday. Rooftop Lounge.\nCirca Resort & Casino.",
