@@ -124,11 +124,6 @@ export default function HomePage() {
         {/* Left: text */}
         <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 py-20 w-full md:w-[58%] bg-[#060c1a]">
           <div className="max-w-xl">
-            <p className="text-[10px] font-semibold tracking-[0.35em] text-gold uppercase mb-6"
-              style={{ color: "#c9a84c", fontFamily: "var(--font-display)" }}>
-              Legacy Club Presents
-            </p>
-
             <h1 className="font-black leading-[0.9] mb-6 uppercase"
               style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 7.5vw, 92px)" }}>
               <span className="heading-gold block">Crypto</span>
