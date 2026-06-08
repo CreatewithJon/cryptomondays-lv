@@ -122,7 +122,7 @@ export default function HomePage() {
       {/* ══ HERO ══ */}
       <section className="relative pt-16 min-h-screen flex items-stretch overflow-hidden">
         {/* Left: text */}
-        <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-24 py-20 w-full md:w-1/2 bg-[#060c1a]">
+        <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 py-20 w-full md:w-[58%] bg-[#060c1a]">
           <div className="max-w-xl">
             <p className="text-[10px] font-semibold tracking-[0.35em] text-gold uppercase mb-6"
               style={{ color: "#c9a84c", fontFamily: "var(--font-display)" }}>
@@ -130,7 +130,7 @@ export default function HomePage() {
             </p>
 
             <h1 className="font-black leading-[0.9] mb-6 uppercase"
-              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(64px, 9vw, 110px)" }}>
+              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 7.5vw, 92px)" }}>
               <span className="heading-gold block">Crypto</span>
               <span className="heading-gold block">Mondays</span>
             </h1>
@@ -179,7 +179,7 @@ export default function HomePage() {
         </div>
 
         {/* Right: venue photo */}
-        <div className="hidden md:block md:w-1/2 relative">
+        <div className="hidden md:block md:w-[42%] relative">
           <Image
             src="/hero-legacy-club.webp"
             alt="Legacy Club Rooftop at Circa Resort, Las Vegas"
