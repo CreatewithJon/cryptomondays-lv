@@ -10,13 +10,11 @@ const slides = [
   {
     src: "/hero-legacy-club.webp",
     alt: "Legacy Club Rooftop at night — Las Vegas skyline",
-    headline: ["Crypto", "Mondays"],
-    sub: "The Premier Crypto Networking\nExperience in Las Vegas",
+    sub: "The Premier Crypto, AI & Emerging\nTechnology Community in Las Vegas",
   },
   {
     src: "/hero-legacy-club-interior.jpg",
     alt: "Legacy Club interior lounge at sunset",
-    headline: ["Crypto", "Mondays"],
     sub: "Every Monday. Rooftop Lounge.\nCirca Resort & Casino.",
   },
 ];
@@ -24,7 +22,6 @@ const slides = [
 export default function HeroCarousel() {
   const [active, setActive] = useState(0);
 
-  // Auto-advance every 6 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % slides.length);
@@ -34,24 +31,55 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative pt-16 min-h-screen flex items-stretch overflow-hidden">
-      {/* Left: text */}
+      {/* ── LEFT: text panel ── */}
       <div className="relative z-10 flex flex-col justify-center px-10 md:px-16 lg:px-20 py-20 w-full md:w-[58%] bg-[#060c1a]">
         <div className="max-w-xl">
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-5 h-px bg-[#c9a84c]/50" />
+            <span className="section-label">Las Vegas · Every Monday</span>
+          </div>
+
+          {/* Headline */}
           <h1
-            className="font-black leading-[0.9] mb-6 uppercase"
+            className="font-black leading-[0.88] mb-5 uppercase"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(56px, 7.5vw, 92px)",
+              fontSize: "clamp(52px, 7vw, 88px)",
             }}
           >
-            <span className="heading-gold block">{slides[active].headline[0]}</span>
-            <span className="heading-gold block">{slides[active].headline[1]}</span>
+            <span className="heading-gold block">Crypto</span>
+            <span className="heading-gold block">Mondays</span>
+            <span
+              className="block"
+              style={{
+                fontSize: "clamp(18px, 2.5vw, 30px)",
+                background: "none",
+                WebkitTextFillColor: "rgba(240,234,216,0.55)",
+                letterSpacing: "0.18em",
+                fontWeight: 400,
+                marginTop: "12px",
+              }}
+            >
+              Las Vegas
+            </span>
           </h1>
 
-          <p className="text-sm md:text-base font-light tracking-[0.15em] text-white/65 uppercase mb-10 leading-relaxed max-w-sm whitespace-pre-line">
+          {/* Subheadline */}
+          <p
+            key={active}
+            className="text-sm md:text-base font-light tracking-[0.12em] text-white/60 uppercase mb-4 leading-relaxed max-w-sm whitespace-pre-line fade-up"
+          >
             {slides[active].sub}
           </p>
 
+          {/* Supporting text */}
+          <p className="text-xs text-white/40 leading-relaxed mb-10 max-w-xs">
+            Join founders, investors, builders, developers, entrepreneurs, and
+            innovators every Monday atop the iconic Legacy Club.
+          </p>
+
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <Link
               href={LUMA_URL}
@@ -59,20 +87,22 @@ export default function HeroCarousel() {
               rel="noopener noreferrer"
               className="btn-gold flex items-center justify-center gap-3 px-8 py-4 text-xs uppercase"
             >
-              RSVP Now
+              RSVP — It&apos;s Free
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path
+                  d="M2 7h10M8 3l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </Link>
             <a
-              href="#about"
+              href="#the-room"
               className="btn-outline-gold flex items-center justify-center gap-3 px-8 py-4 text-xs uppercase"
             >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.2"/>
-                <path d="M7.5 6.5L12 9l-4.5 2.5V6.5z" fill="currentColor"/>
-              </svg>
-              Learn More
+              See The Community
             </a>
           </div>
 
@@ -86,7 +116,10 @@ export default function HeroCarousel() {
               >
                 <span
                   className="text-xs font-semibold transition-colors"
-                  style={{ color: active === i ? "#c9a84c" : "rgba(255,255,255,0.25)" }}
+                  style={{
+                    color:
+                      active === i ? "#c9a84c" : "rgba(255,255,255,0.25)",
+                  }}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -104,8 +137,9 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Right: photo with crossfade */}
+      {/* ── RIGHT: photo panel with crossfade + floating attendee cards ── */}
       <div className="hidden md:block md:w-[42%] relative">
+        {/* Venue slides */}
         {slides.map((slide, i) => (
           <div
             key={slide.src}
@@ -122,6 +156,61 @@ export default function HeroCarousel() {
           </div>
         ))}
 
+        {/* ── Floating attendee card — top right ── */}
+        {/* Replace inner <div> with <Image> when attendees-rooftop-selfie.jpg is in /public */}
+        <div
+          className="absolute top-20 right-8 z-20 w-40 overflow-hidden"
+          style={{
+            transform: "rotate(2deg)",
+            boxShadow:
+              "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.3)",
+          }}
+        >
+          {/* Photo slot — swap this div for <Image> when file is ready */}
+          <div className="relative w-full bg-[#0a1428]" style={{ aspectRatio: "4/3" }}>
+            <Image
+              src="/attendees-rooftop-selfie.jpg"
+              alt="Crypto Mondays Las Vegas attendees on rooftop"
+              fill
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#060c1a]/60 to-transparent" />
+          </div>
+          <div className="bg-[#0a1428] border-t border-[#c9a84c]/20 px-3 py-2">
+            <div className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#c9a84c]">
+              On The Rooftop
+            </div>
+            <div className="text-[8px] text-white/40">Legacy Club · Circa</div>
+          </div>
+        </div>
+
+        {/* ── Floating attendee card — lower left ── */}
+        {/* Replace inner <div> with <Image> when attendees-group.jpg is in /public */}
+        <div
+          className="absolute bottom-24 left-[-28px] z-20 w-44 overflow-hidden"
+          style={{
+            transform: "rotate(-1.5deg)",
+            boxShadow:
+              "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.3)",
+          }}
+        >
+          <div className="relative w-full bg-[#0a1428]" style={{ aspectRatio: "4/3" }}>
+            <Image
+              src="/attendees-group.jpg"
+              alt="Crypto Mondays Las Vegas community group"
+              fill
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#060c1a]/60 to-transparent" />
+          </div>
+          <div className="bg-[#0a1428] border-t border-[#c9a84c]/20 px-3 py-2">
+            <div className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#c9a84c]">
+              The Community
+            </div>
+            <div className="text-[8px] text-white/40">Real People · Every Monday</div>
+          </div>
+        </div>
+
         {/* Left fade into navy */}
         <div
           className="absolute inset-y-0 left-0 w-40 z-10 pointer-events-none"
@@ -133,7 +222,10 @@ export default function HeroCarousel() {
           style={{ background: "linear-gradient(to top, #060c1a, transparent)" }}
         />
         {/* Subtle dark overlay */}
-        <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "rgba(4,8,15,0.25)" }} />
+        <div
+          className="absolute inset-0 z-[5] pointer-events-none"
+          style={{ background: "rgba(4,8,15,0.2)" }}
+        />
       </div>
     </section>
   );

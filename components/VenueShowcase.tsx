@@ -4,9 +4,18 @@ import Link from "next/link";
 const LUMA_URL = "https://luma.com/CryptoMondaysVegas";
 
 const venueHighlights = [
-  { label: "Rooftop Atmosphere", desc: "An open-air rooftop lounge with a curated ambiance that sets the stage for serious conversations." },
-  { label: "Las Vegas Skyline Views", desc: "Unobstructed views of downtown Las Vegas and the Fremont Street corridor from above." },
-  { label: "Premium Bar Service", desc: "Full bar service with craft cocktails, spirits, and non-alcoholic options throughout the event." },
+  {
+    label: "Rooftop Atmosphere",
+    desc: "An open-air rooftop lounge with a curated ambiance that sets the stage for serious conversations.",
+  },
+  {
+    label: "Las Vegas Skyline Views",
+    desc: "Unobstructed views of downtown Las Vegas and the Fremont Street corridor from above.",
+  },
+  {
+    label: "Premium Bar Service",
+    desc: "Full bar service with craft cocktails, spirits, and non-alcoholic options throughout the event.",
+  },
 ];
 
 export default function VenueShowcase() {
@@ -20,7 +29,8 @@ export default function VenueShowcase() {
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(28px, 4vw, 52px)",
-            background: "linear-gradient(135deg, #c9a84c 0%, #e8c465 50%, #c9a84c 100%)",
+            background:
+              "linear-gradient(135deg, #c9a84c 0%, #e8c465 50%, #c9a84c 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -31,21 +41,22 @@ export default function VenueShowcase() {
         </h2>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-[#c9a84c]/12 mb-8">
-          {/* Left: image */}
-          <div className="relative overflow-hidden" style={{ aspectRatio: "4/5", minHeight: "400px" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-[#c9a84c]/12 mb-3">
+          {/* Left: main venue image */}
+          <div
+            className="relative overflow-hidden"
+            style={{ aspectRatio: "4/5", minHeight: "400px" }}
+          >
             <Image
-              src="/hero-legacy-club.webp"
-              alt="Legacy Club Rooftop at Circa Resort — Las Vegas"
+              src="/venue-legacy-club-firepit.jpg"
+              alt="Legacy Club Rooftop fire pit — Circa Resort Las Vegas"
               fill
               className="object-cover object-center"
             />
-            {/* Right fade */}
             <div
               className="absolute inset-y-0 right-0 w-24 z-10 pointer-events-none hidden md:block"
               style={{ background: "linear-gradient(to right, transparent, #060c1a)" }}
             />
-            {/* Gold border overlay */}
             <div className="absolute inset-0 border border-[#c9a84c]/08 pointer-events-none" />
           </div>
 
@@ -55,9 +66,10 @@ export default function VenueShowcase() {
               Legacy Club Rooftop — Circa Resort &amp; Casino
             </p>
             <p className="text-sm text-white/55 leading-relaxed mb-8">
-              Perched atop Circa Resort &amp; Casino on Fremont Street, Legacy Club is Las Vegas&apos;s most iconic rooftop
-              lounge. Every Monday night, this premium venue transforms into the gathering ground for the city&apos;s most
-              forward-thinking minds in crypto, AI, and emerging technology.
+              Perched atop Circa Resort &amp; Casino on Fremont Street, Legacy Club is Las
+              Vegas&apos;s most iconic rooftop lounge. Every Monday night, this premium venue
+              transforms into the gathering ground for the city&apos;s most forward-thinking
+              minds in crypto, AI, and emerging technology.
             </p>
 
             <div className="space-y-5 mb-10">
@@ -65,7 +77,9 @@ export default function VenueShowcase() {
                 <div key={h.label} className="flex items-start gap-4">
                   <div className="w-px h-full min-h-[40px] bg-[#c9a84c]/30 flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-1">{h.label}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#c9a84c] mb-1">
+                      {h.label}
+                    </div>
                     <p className="text-xs text-white/40 leading-relaxed">{h.desc}</p>
                   </div>
                 </div>
@@ -80,25 +94,62 @@ export default function VenueShowcase() {
             >
               RSVP For Free
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path
+                  d="M2 7h10M8 3l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </Link>
           </div>
         </div>
 
-        {/* Wide banner image */}
-        <div className="relative overflow-hidden border border-[#c9a84c]/12" style={{ aspectRatio: "16/5" }}>
-          <Image
-            src="/hero-legacy-club-interior.jpg"
-            alt="Legacy Club interior lounge — Circa Resort Las Vegas"
-            fill
-            className="object-cover object-center"
-          />
+        {/* Side-by-side secondary images */}
+        <div className="grid grid-cols-2 gap-3">
           <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(to top, rgba(6,12,26,0.6) 0%, transparent 60%)" }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/40 to-transparent" />
+            className="relative overflow-hidden border border-[#c9a84c]/12"
+            style={{ aspectRatio: "16/7" }}
+          >
+            <Image
+              src="/venue-legacy-club-sunset.jpg"
+              alt="Legacy Club rooftop at sunset with panoramic Las Vegas skyline"
+              fill
+              className="object-cover object-center"
+            />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(6,12,26,0.5) 0%, transparent 60%)",
+              }}
+            />
+            <div className="absolute bottom-3 left-4 z-10">
+              <span className="ecosystem-tag">Sunset Views</span>
+            </div>
+          </div>
+          <div
+            className="relative overflow-hidden border border-[#c9a84c]/12"
+            style={{ aspectRatio: "16/7" }}
+          >
+            <Image
+              src="/hero-legacy-club-interior.jpg"
+              alt="Legacy Club interior lounge — Circa Resort Las Vegas"
+              fill
+              className="object-cover object-center"
+            />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(6,12,26,0.5) 0%, transparent 60%)",
+              }}
+            />
+            <div className="absolute bottom-3 left-4 z-10">
+              <span className="ecosystem-tag">Interior Lounge</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
