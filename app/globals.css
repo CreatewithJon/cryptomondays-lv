@@ -64,6 +64,19 @@ body {
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
+/* ── GLASS CARD ── */
+.glass-card {
+  backdrop-filter: blur(16px);
+  background: rgba(13, 26, 53, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  transition: all 0.25s;
+}
+.glass-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
 /* ── DIVIDERS ── */
 .gold-line {
   height: 1px;
@@ -79,6 +92,56 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #c9a84c;
+}
+
+/* ── STATS NUMBER ── */
+.stats-number {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  background: linear-gradient(135deg, #b8922e, #e8c465, #c9a84c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── ECOSYSTEM TAG ── */
+.ecosystem-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  color: rgba(201, 168, 76, 0.8);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes shimmer {
+  0%,100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+.gold-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 /* ── HERO PHOTO SIDE ── */

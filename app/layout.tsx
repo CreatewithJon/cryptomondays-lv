@@ -15,9 +15,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Crypto Mondays Las Vegas — The Premier Crypto Networking Experience",
+  title: "Crypto Mondays Las Vegas | Premier Crypto, AI & Web3 Networking",
   description:
-    "Every Monday at Legacy Club Rooftop, Circa Resort & Casino, Downtown Las Vegas. The premier crypto networking experience for founders, investors, and builders.",
+    "The premier crypto, AI, Bitcoin, and Web3 networking community in Las Vegas. Every Monday at Legacy Club Rooftop, Circa Resort & Casino. Free admission.",
+  keywords:
+    "Crypto Mondays Las Vegas, crypto events Las Vegas, Bitcoin meetup Las Vegas, AI events Las Vegas, Web3 community Las Vegas, startup networking Las Vegas, emerging technology Las Vegas",
+  openGraph: {
+    title: "Crypto Mondays Las Vegas | Premier Crypto, AI & Web3 Networking",
+    description:
+      "The premier crypto, AI, Bitcoin, and Web3 networking community in Las Vegas. Every Monday at Legacy Club Rooftop, Circa Resort & Casino. Free admission.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
