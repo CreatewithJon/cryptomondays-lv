@@ -1,23 +1,21 @@
 // ── PREVIOUS EVENTS ─────────────────────────────────────────────────────────
-// Add event recap photos to /public/ named:
-//   event-recap-1.jpg  event-recap-2.jpg  event-recap-3.jpg
-// Then replace each PhotoSlot with:
-//   <Image src="/event-recap-N.jpg" alt="..." fill className="object-cover" />
-// Update the eventRecaps array with real dates and attendance numbers.
+// Fetches from Supabase cm_recaps (published=true), limit 3, ordered by event_date desc.
+// Falls back to placeholder content if no data available.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import Link from "next/link";
+import Link from "next/link"
+import { createClient } from "@/lib/supabase/server"
+import type { CmRecap } from "@/lib/types/admin"
 
-const eventRecaps = [
+const PLACEHOLDER_RECAPS = [
   {
     date: "June 2025",
     title: "Crypto Mondays LV",
     venue: "Legacy Club Rooftop — Circa Resort",
     attendance: "80+ Attendees",
     tags: ["Bitcoin", "AI", "Web3"],
-    recap:
-      "A packed rooftop gathering with conversations spanning Bitcoin treasury strategies, AI automation for local businesses, and the future of decentralized finance in Las Vegas.",
-    photo: null, // replace with: "/event-recap-1.jpg"
+    recap: "A packed rooftop gathering with conversations spanning Bitcoin treasury strategies, AI automation for local businesses, and the future of decentralized finance in Las Vegas.",
+    photo: null,
   },
   {
     date: "May 2025",
@@ -25,9 +23,8 @@ const eventRecaps = [
     venue: "Legacy Club Rooftop — Circa Resort",
     attendance: "75+ Attendees",
     tags: ["DeFi", "Startups", "Networking"],
-    recap:
-      "Founders, investors, and operators connected over emerging DeFi protocols and Las Vegas startup ecosystem opportunities. Several partnerships formed on the night.",
-    photo: null, // replace with: "/event-recap-2.jpg"
+    recap: "Founders, investors, and operators connected over emerging DeFi protocols and Las Vegas startup ecosystem opportunities. Several partnerships formed on the night.",
+    photo: null,
   },
   {
     date: "April 2025",
@@ -35,13 +32,50 @@ const eventRecaps = [
     venue: "Legacy Club Rooftop — Circa Resort",
     attendance: "70+ Attendees",
     tags: ["NFTs", "AI Tools", "Community"],
-    recap:
-      "The community explored practical AI tool stacks and their intersection with digital ownership. One of our highest-energy nights with several first-time attendees joining the regulars.",
-    photo: null, // replace with: "/event-recap-3.jpg"
+    recap: "The community explored practical AI tool stacks and their intersection with digital ownership. One of our highest-energy nights with several first-time attendees joining the regulars.",
+    photo: null,
   },
-];
+]
 
-export default function PreviousEvents() {
+type DisplayRecap = {
+  date: string
+  title: string
+  venue: string
+  attendance: string
+  tags: string[]
+  recap: string
+  photo: string | null
+}
+
+export default async function PreviousEvents() {
+  let eventRecaps: DisplayRecap[] = PLACEHOLDER_RECAPS
+
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from("cm_recaps")
+      .select("*")
+      .eq("published", true)
+      .order("event_date", { ascending: false })
+      .limit(3)
+
+    if (!error && data && data.length > 0) {
+      eventRecaps = (data as CmRecap[]).map((r) => ({
+        date: r.event_date
+          ? new Date(r.event_date + "T00:00:00").toLocaleDateString("en-US", { month: "long", year: "numeric" })
+          : "TBD",
+        title: r.title,
+        venue: r.venue ?? "Venue TBD",
+        attendance: r.attendee_count ? `${r.attendee_count}+ Attendees` : "Attendees",
+        tags: r.tags ?? [],
+        recap: r.recap ?? "",
+        photo: r.featured_photo_url,
+      }))
+    }
+  } catch {
+    // Supabase not configured yet — use placeholders
+  }
+
   return (
     <section className="py-28 bg-[#060c1a]" id="past-events">
       <div className="max-w-6xl mx-auto px-8">
@@ -54,8 +88,7 @@ export default function PreviousEvents() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 48px)",
-                background:
-                  "linear-gradient(135deg, #b8922e 0%, #e8c465 40%, #c9a84c 100%)",
+                background: "linear-gradient(135deg, #b8922e 0%, #e8c465 40%, #c9a84c 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -82,26 +115,19 @@ export default function PreviousEvents() {
                 style={{ aspectRatio: "16/9" }}
               >
                 {event.photo ? (
-                  // <Image src={event.photo} alt={event.title} fill className="object-cover" />
-                  null
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={event.photo} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                     {/* Subtle grid */}
                     <div
                       className="absolute inset-0 opacity-[0.025]"
                       style={{
-                        backgroundImage:
-                          "linear-gradient(rgba(201,168,76,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)",
+                        backgroundImage: "linear-gradient(rgba(201,168,76,1) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)",
                         backgroundSize: "28px 28px",
                       }}
                     />
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 32 32"
-                      fill="none"
-                      className="text-[#c9a84c]/15 z-10"
-                    >
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-[#c9a84c]/15 z-10">
                       <rect x="3" y="3" width="26" height="26" rx="2" stroke="currentColor" strokeWidth="1.2" />
                       <circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.2" />
                       <path d="M3 22l8-7 5 5 4-4 7 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -135,13 +161,15 @@ export default function PreviousEvents() {
                 <p className="text-xs text-white/50 leading-relaxed flex-1">{event.recap}</p>
 
                 {/* Topic tags */}
-                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[#c9a84c]/08">
-                  {event.tags.map((tag) => (
-                    <span key={tag} className="ecosystem-tag" style={{ fontSize: "8px" }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {event.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[#c9a84c]/08">
+                    {event.tags.map((tag) => (
+                      <span key={tag} className="ecosystem-tag" style={{ fontSize: "8px" }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -161,5 +189,5 @@ export default function PreviousEvents() {
         </div>
       </div>
     </section>
-  );
+  )
 }

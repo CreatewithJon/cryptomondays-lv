@@ -1,6 +1,31 @@
-import { sponsorTiers } from "@/lib/data/sponsors";
+// ── SPONSOR SECTION ──────────────────────────────────────────────────────────
+// Fetches live sponsors from cm_sponsors (published=true) with fallback to
+// existing sponsor tiers content for the pricing section.
+// ─────────────────────────────────────────────────────────────────────────────
 
-export default function SponsorSection() {
+import { sponsorTiers } from "@/lib/data/sponsors"
+import { createClient } from "@/lib/supabase/server"
+import type { CmSponsor } from "@/lib/types/admin"
+import Image from "next/image"
+
+export default async function SponsorSection() {
+  let activeSponsors: CmSponsor[] = []
+
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from("cm_sponsors")
+      .select("*")
+      .eq("published", true)
+      .order("sort_order", { ascending: true })
+
+    if (!error && data && data.length > 0) {
+      activeSponsors = data as CmSponsor[]
+    }
+  } catch {
+    // Supabase not configured yet — show placeholder logos
+  }
+
   return (
     <section className="py-24 px-8 bg-[#060c1a]">
       <div className="max-w-6xl mx-auto">
@@ -77,23 +102,51 @@ export default function SponsorSection() {
           </a>
         </div>
 
-        {/* Current sponsors placeholder */}
+        {/* Current sponsors */}
         <div>
           <p className="section-label mb-6 text-center">Current Sponsors</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="border border-dashed border-[#c9a84c]/15 aspect-video flex items-center justify-center"
-              >
-                <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/15">
-                  Your Logo
-                </span>
-              </div>
-            ))}
+            {activeSponsors.length > 0 ? (
+              activeSponsors.map((sponsor) => (
+                <a
+                  key={sponsor.id}
+                  href={sponsor.website_url ?? "#"}
+                  target={sponsor.website_url ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="border border-[#c9a84c]/15 aspect-video flex items-center justify-center p-3 transition-all hover:border-[#c9a84c]/30"
+                  title={sponsor.name}
+                >
+                  {sponsor.logo_url ? (
+                    <Image
+                      src={sponsor.logo_url}
+                      alt={sponsor.name}
+                      width={120}
+                      height={60}
+                      className="object-contain max-w-full max-h-full"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.15em] text-white/40 text-center">
+                      {sponsor.name}
+                    </span>
+                  )}
+                </a>
+              ))
+            ) : (
+              Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="border border-dashed border-[#c9a84c]/15 aspect-video flex items-center justify-center"
+                >
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/15">
+                    Your Logo
+                  </span>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

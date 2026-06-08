@@ -1,45 +1,74 @@
 // ── TESTIMONIALS ───────────────────────────────────────────────────────────
-// Replace placeholder content with real attendee testimonials.
-// For each testimonial, add a headshot at /public/testimonial-N.jpg and
-// swap the silhouette placeholder with:
-//   <Image src="/testimonial-N.jpg" alt="name" fill className="object-cover object-top" />
+// Fetches from Supabase cm_testimonials (published=true, featured=true).
+// Falls back to placeholder content if no data is available.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import Link from "next/link";
+import Link from "next/link"
+import { createClient } from "@/lib/supabase/server"
+import type { CmTestimonial } from "@/lib/types/admin"
 
-const LUMA_URL = "https://luma.com/CryptoMondaysVegas";
+const LUMA_URL = "https://luma.com/CryptoMondaysVegas"
 
-const testimonials = [
+const PLACEHOLDER_TESTIMONIALS = [
   {
-    quote:
-      "Every Monday I walk out with at least one real connection. The quality of people here is unmatched anywhere else in Las Vegas.",
+    quote: "Every Monday I walk out with at least one real connection. The quality of people here is unmatched anywhere else in Las Vegas.",
     name: "Your Name Here",
     title: "Founder",
     company: "Your Company",
     tag: "Founder",
-    photo: null, // replace with: "/testimonial-1.jpg"
+    headshot_url: null,
   },
   {
-    quote:
-      "I've closed two deals from conversations that started on that rooftop. Crypto Mondays is where Las Vegas tech actually meets.",
+    quote: "I've closed two deals from conversations that started on that rooftop. Crypto Mondays is where Las Vegas tech actually meets.",
     name: "Your Name Here",
     title: "Investor",
     company: "Your Company",
     tag: "Investor",
-    photo: null, // replace with: "/testimonial-2.jpg"
+    headshot_url: null,
   },
   {
-    quote:
-      "The vibe is different here. It's not a conference. It's a community. You show up, you belong, and the conversations are real.",
+    quote: "The vibe is different here. It's not a conference. It's a community. You show up, you belong, and the conversations are real.",
     name: "Your Name Here",
     title: "AI Builder",
     company: "Your Company",
     tag: "Builder",
-    photo: null, // replace with: "/testimonial-3.jpg"
+    headshot_url: null,
   },
-];
+]
 
-export default function Testimonials() {
+export default async function Testimonials() {
+  let testimonials: Array<{
+    quote: string
+    name: string
+    title: string | null
+    company: string | null
+    tag?: string
+    headshot_url: string | null
+  }> = PLACEHOLDER_TESTIMONIALS
+
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from("cm_testimonials")
+      .select("*")
+      .eq("published", true)
+      .eq("featured", true)
+      .order("sort_order", { ascending: true })
+
+    if (!error && data && data.length > 0) {
+      testimonials = (data as CmTestimonial[]).map((t) => ({
+        quote: t.quote,
+        name: t.name,
+        title: t.title,
+        company: t.company,
+        tag: t.title ?? "Community",
+        headshot_url: t.headshot_url,
+      }))
+    }
+  } catch {
+    // Supabase not configured yet — use placeholders
+  }
+
   return (
     <section className="py-28 bg-[#08112a]" id="testimonials">
       <div className="max-w-6xl mx-auto px-8">
@@ -52,8 +81,7 @@ export default function Testimonials() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 4vw, 48px)",
-                background:
-                  "linear-gradient(135deg, #b8922e 0%, #e8c465 40%, #c9a84c 100%)",
+                background: "linear-gradient(135deg, #b8922e 0%, #e8c465 40%, #c9a84c 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -63,8 +91,7 @@ export default function Testimonials() {
             </h2>
           </div>
           <p className="text-xs text-white/35 max-w-xs leading-relaxed">
-            Collect real testimonials after each event and add them here.
-            These are placeholder structures ready to be filled.
+            Real words from the Crypto Mondays Las Vegas community.
           </p>
         </div>
 
@@ -84,7 +111,7 @@ export default function Testimonials() {
               </div>
 
               {/* Tag */}
-              <span className="ecosystem-tag self-start">{t.tag}</span>
+              {t.tag && <span className="ecosystem-tag self-start">{t.tag}</span>}
 
               {/* Quote */}
               <blockquote className="text-sm text-white/65 leading-relaxed italic flex-1">
@@ -95,10 +122,9 @@ export default function Testimonials() {
               <div className="flex items-center gap-4 pt-4 border-t border-[#c9a84c]/10">
                 {/* Headshot */}
                 <div className="w-11 h-11 rounded-full border border-[#c9a84c]/25 bg-[#0d1a35] flex-shrink-0 overflow-hidden flex items-center justify-center">
-                  {t.photo ? (
-                    // When photo is ready:
-                    // <Image src={t.photo} alt={t.name} width={44} height={44} className="object-cover" />
-                    null
+                  {t.headshot_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={t.headshot_url} alt={t.name} className="w-full h-full object-cover object-top" />
                   ) : (
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-[#c9a84c]/25">
                       <circle cx="10" cy="7" r="3.5" stroke="currentColor" strokeWidth="1.2" />
@@ -112,7 +138,7 @@ export default function Testimonials() {
                     {t.name}
                   </div>
                   <div className="text-[9px] text-white/35 mt-0.5">
-                    {t.title} · {t.company}
+                    {t.title && t.company ? `${t.title} · ${t.company}` : t.title ?? t.company ?? ""}
                   </div>
                 </div>
               </div>
@@ -139,5 +165,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  );
+  )
 }
