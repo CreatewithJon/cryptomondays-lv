@@ -2,11 +2,10 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
+import Image from "next/image"
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
@@ -16,22 +15,16 @@ export default function AdminLoginPage() {
     setError(null)
     setLoading(true)
 
-    try {
-      const supabase = createClient()
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
+    const res = await fetch("/api/cm-admin-auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    })
 
-      if (authError) {
-        setError(authError.message)
-        setLoading(false)
-        return
-      }
-
+    if (res.ok) {
       router.push("/crypto-mondays-admin/dashboard")
-    } catch {
-      setError("An unexpected error occurred. Please try again.")
+    } else {
+      setError("Incorrect password.")
       setLoading(false)
     }
   }
@@ -43,75 +36,33 @@ export default function AdminLoginPage() {
     >
       <div className="w-full max-w-sm">
         {/* Logo */}
-        <div className="text-center mb-10">
-          <div
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-5 border"
-            style={{
-              background: "linear-gradient(135deg, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.05) 100%)",
-              borderColor: "rgba(201,168,76,0.25)",
-            }}
-          >
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <circle cx="14" cy="14" r="10" stroke="#c9a84c" strokeWidth="1.5" />
-              <path d="M10 14c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round" />
-              <circle cx="14" cy="14" r="2" fill="#c9a84c" />
-            </svg>
-          </div>
+        <div className="flex justify-center mb-8">
+          <Image
+            src="/crypto-mondays-logo.png"
+            alt="Crypto Mondays Las Vegas"
+            width={100}
+            height={100}
+          />
+        </div>
+
+        <div className="text-center mb-8">
           <h1
             className="font-bold uppercase tracking-[0.15em] mb-1"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "14px",
-              color: "#c9a84c",
-            }}
+            style={{ fontFamily: "var(--font-display)", fontSize: "13px", color: "#c9a84c" }}
           >
             Crypto Mondays LV
           </h1>
-          <p className="text-xs" style={{ color: "rgba(240,234,216,0.4)" }}>
+          <p className="text-xs" style={{ color: "rgba(240,234,216,0.35)" }}>
             Admin Dashboard
           </p>
         </div>
 
-        {/* Form card */}
+        {/* Form */}
         <div
           className="rounded-2xl p-8 border"
-          style={{
-            backgroundColor: "#0d1a35",
-            borderColor: "rgba(201,168,76,0.15)",
-          }}
+          style={{ backgroundColor: "#0d1a35", borderColor: "rgba(201,168,76,0.15)" }}
         >
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-[10px] font-semibold uppercase tracking-[0.18em] mb-2"
-                style={{ color: "rgba(240,234,216,0.45)" }}
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-                className="w-full px-4 py-3 rounded-xl text-sm transition-colors outline-none"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(201,168,76,0.12)",
-                  color: "#f0ead8",
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.5)"
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.12)"
-                }}
-                placeholder="admin@cryptomondayslv.com"
-              />
-            </div>
-
             <div>
               <label
                 htmlFor="password"
@@ -126,19 +77,16 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoFocus
                 autoComplete="current-password"
-                className="w-full px-4 py-3 rounded-xl text-sm transition-colors outline-none"
+                className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-colors"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.04)",
                   border: "1px solid rgba(201,168,76,0.12)",
                   color: "#f0ead8",
                 }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.5)"
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(201,168,76,0.12)"
-                }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(201,168,76,0.5)")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(201,168,76,0.12)")}
                 placeholder="••••••••"
               />
             </div>
@@ -168,14 +116,14 @@ export default function AdminLoginPage() {
                 cursor: loading ? "not-allowed" : "pointer",
               }}
             >
-              {loading ? "Signing in…" : "Sign In"}
+              {loading ? "Signing in…" : "Enter Dashboard"}
             </button>
           </form>
         </div>
 
         <p
           className="text-center text-[10px] mt-6 uppercase tracking-[0.2em]"
-          style={{ color: "rgba(240,234,216,0.2)" }}
+          style={{ color: "rgba(240,234,216,0.15)" }}
         >
           Authorized personnel only
         </p>

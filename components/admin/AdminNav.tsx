@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 
 const NAV_ITEMS = [
   {
@@ -94,8 +93,7 @@ export default function AdminNav() {
   const router = useRouter()
 
   async function handleSignOut() {
-    const supabase = createClient()
-    await supabase.auth.signOut()
+    await fetch("/api/cm-admin-auth", { method: "DELETE" })
     router.push("/crypto-mondays-admin")
   }
 
