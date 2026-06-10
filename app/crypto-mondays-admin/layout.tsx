@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import AdminNav from "@/components/admin/AdminNav"
 
@@ -10,10 +9,12 @@ export default async function AdminLayout({
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
+  // Not authenticated — just render children (login page) with no admin chrome
   if (!user) {
-    redirect("/crypto-mondays-admin")
+    return <>{children}</>
   }
 
+  // Authenticated — render full admin layout with sidebar
   return (
     <div
       className="min-h-screen flex"
