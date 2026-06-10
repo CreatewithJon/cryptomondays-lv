@@ -86,7 +86,7 @@ export default async function SponsorSection() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <a
-            href="mailto:hello@cryptomondayslv.com"
+            href="mailto:powerfullape.eth@gmail.com"
             className="btn-gold inline-flex items-center justify-center gap-3 px-10 py-4 text-xs uppercase"
           >
             Become A Sponsor
@@ -95,7 +95,7 @@ export default async function SponsorSection() {
             </svg>
           </a>
           <a
-            href="mailto:hello@cryptomondayslv.com"
+            href="mailto:powerfullape.eth@gmail.com"
             className="btn-outline-gold inline-flex items-center justify-center gap-3 px-10 py-4 text-xs uppercase"
           >
             Schedule a Call
